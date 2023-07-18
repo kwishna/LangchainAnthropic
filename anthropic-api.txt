@@ -1,0 +1,75 @@
+model - string - required
+The model that will complete your prompt.
+
+As we improve Claude, we develop new versions of it that you can query. This parameter controls which version of Claude answers your request.
+Right now we are offering two model families: Claude, and Claude Instant.
+You can use them by setting model to "claude-2" or "claude-instant-1", respectively. See models for additional details.
+
+|-----------------------------------------------------------------|
+| Family ----------- Latest major version --- Latest full version |
+| Claude Instant --- claude-instant-1 ------- claude-instant-1.1  |
+| Claude ----------- claude-2 --------------- claude-2.0 ---------|
+|-----------------------------------------------------------------|
+
+prompt -- blob -- required
+The prompt that you want Claude to complete.
+
+For proper response generation you will need to format your prompt as follows:
+
+JavaScript
+----------
+const userQuestion = r"Why is the sky blue?";
+const prompt = `\n\nHuman: ${userQuestion}\n\nAssistant:`;
+See our comments on prompts for more context.
+
+
+Human: Hello, world!
+
+Assistant:
+max_tokens_to_sample -- integer -- required
+The maximum number of tokens to generate before stopping.
+
+Note that our models may stop before reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
+
+stop_sequences -- array of strings
+Sequences that will cause the model to stop generating completion text.
+Our models stop on "\n\nHuman:", and may include additional built-in stop sequences in the future. By providing the stop_sequences parameter,
+you may include additional strings that will cause the model to stop generating.
+
+
+temperature -- number
+Amount of randomness injected into the response.
+Defaults to 1. Ranges from 0 to 1. Use temp closer to 0 for analytical / multiple choice, and closer to 1 for creative and generative tasks.
+
+top_p -- number
+Use nucleus sampling.
+In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order
+and cut it off once it reaches a particular probability specified by top_p. You should either alter temperature or top_p, but not both.
+
+top_k -- integer
+Only sample from the top K options for each subsequent token.
+Used to remove "long tail" low probability responses. Learn more technical details here.
+
+metadata -- object
+An object describing metadata about the request.
+{
+    "user_id": 128868969870
+}
+An external identifier for the user who is associated with the request.
+This should be a uuid, hash value, or other opaque identifier.
+Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
+
+stream -- boolean
+Whether to incrementally stream the response using server-sent events.
+
+See this guide to SSE events for details.
+
+
+RESPONSES
+--------
+
+200
+Successful Response
+
+4XX
+Client Error
