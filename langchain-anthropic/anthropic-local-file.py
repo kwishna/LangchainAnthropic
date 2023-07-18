@@ -8,7 +8,7 @@ import os
 
 os.environ['ANTHROPIC_API_KEY'] = 'Anthropic Key'
 
-loader = DirectoryLoader("./directory_name",
+loader = DirectoryLoader("./dir",
                          glob='./*.txt',
                          loader_cls=TextLoader)
 documents = loader.load()

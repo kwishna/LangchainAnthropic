@@ -1,0 +1,9 @@
+
+What is Claude?
+Claude is a large language model (LLM) built by Anthropic. It's trained to be a helpful assistant in a conversational tone.
+
+There are a couple of different ways to interact with Claude:
+
+Chat - Anthropic's console lets you talk to Claude in a chat interface.
+API - Allows integrating Claude with your product for your customers.
+The common thread behind these interfaces is Claude: the way you talk to it is mostly the same, regardless of which interface you use. This makes it easy to, for example, experiment with how you prompt Claude in the console, and move your prompt into a more automated API-based system.

@@ -5,19 +5,20 @@ from langchain.agents import initialize_agent
 from langchain.tools import DuckDuckGoSearchRun
 import os
 
-os.environ['ANTHROPIC_API_KEY'] = 'Anthropic Key'
+os.environ['ANTHROPIC_API_KEY'] = 'Anthropic API Key'
 
 memory = ConversationBufferMemory(memory_key='chat_history',
                                   return_messages=True)
+
 llm = ChatAnthropic(model='claude-2', temperature=0.7)
 search = DuckDuckGoSearchRun()
 
 tools = [
   Tool(
-    name='Current Search',
+    name='Duckduckgo Search Engine Internet Access',
     func=search.run,
     description=
-    "useful for when you need to answer questions about current events or the current state of the world"
+    "To fetch information from internet to have the access to all the data available on the internet till today."
   ),
 ]
 
@@ -28,5 +29,5 @@ agent_chain = initialize_agent(
   memory=memory)
 
 print(agent_chain.run(input="Hi, I am human."))
-print(agent_chain.run(input="What is Elon musk's X.ai?"))
-print(agent_chain.run(input="What do they plan to do?"))
+print(agent_chain.run(input="Why does governments are not concerned to uncontrolled rapid AI development? How does it going to benefit big businesses?"))
+print(agent_chain.run(input="how the education system is going to change in the future?"))
